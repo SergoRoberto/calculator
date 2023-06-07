@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	calculator("2 + 2, 3 - 3, 4 * 3, 12 / 3")
+	fmt.Println(calculator("12332432 * 124543123, 2 + 2, 3 - 3, 4 * 3, 12 / 3"))
 
 }
 
@@ -30,16 +30,22 @@ func calculator(str string) string {
 
 		switch sym[1] {
 		case "+":
-			go calculate.Add(x, y)
+			go calculate.Add(res, x, y)
 		case "-":
-			go calculate.Subtract(x, y)
+			go calculate.Subtract(res, x, y)
 		case "*":
-			go calculate.Multiply(x, y)
+			go calculate.Multiply(res, x, y)
 		case "/":
-			go calculate.Divide(x, y)
+			go calculate.Divide(res, x, y)
 		}
-		fmt.Println(sym[1])
+	}
+	result := ""
+	for i := range exps {
+		result += <-res
+		if i != len(exps)-1 {
+			result += ", "
+		}
 	}
 
-	return <-res
+	return result
 }

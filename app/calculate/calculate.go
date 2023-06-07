@@ -1,17 +1,21 @@
 package calculate
 
-func Add(x int, y int) int {
-	return x + y
+import (
+	"strconv"
+)
+
+func Add(res chan string, x int, y int) {
+	res <- strconv.Itoa(x) + " + " + strconv.Itoa(y) + " = " + strconv.Itoa(x+y)
 }
 
-func Subtract(x int, y int) int {
-	return x - y
+func Subtract(res chan string, x int, y int) {
+	res <- strconv.Itoa(x) + " - " + strconv.Itoa(y) + " = " + strconv.Itoa(x-y)
 }
 
-func Multiply(x int, y int) int {
-	return x * y
+func Multiply(res chan string, x int, y int) {
+	res <- strconv.Itoa(x) + " * " + strconv.Itoa(y) + " = " + strconv.Itoa(x*y)
 }
 
-func Divide(x int, y int) int {
-	return x / y
+func Divide(res chan string, x int, y int) {
+	res <- strconv.Itoa(x) + " / " + strconv.Itoa(y) + " = " + strconv.Itoa(x/y)
 }
